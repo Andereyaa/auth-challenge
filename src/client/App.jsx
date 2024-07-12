@@ -66,7 +66,22 @@ function App() {
     localStorage.setItem("token", token);
   };
 
-  const handleCreateMovie = async ({ title, description, runtimeMins }) => {};
+  const handleCreateMovie = async ({ title, description, runtimeMins }) => {
+    const data = { title, description, runtimeMins };
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(data),
+    };
+
+    const response = await fetch(`${apiUrl}/movie`, options);
+    const newMovie = await response.json();
+    setMovies([...movies, newMovie]);
+  };
 
   return (
     <div className="App">
