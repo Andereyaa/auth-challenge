@@ -79,8 +79,8 @@ function App() {
     };
 
     const response = await fetch(`${apiUrl}/movie`, options);
-    const newMovie = await response.json();
-    setMovies([...movies, newMovie]);
+    const responseData = await response.json();
+    setMovies([...movies, responseData.data]);
   };
 
   return (

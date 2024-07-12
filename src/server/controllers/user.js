@@ -22,11 +22,12 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { username, password } = req.body;
+
   if (!password || !username) {
     return res.status(409).json({ error: "username and password required" });
   }
 
-  const foundUser = find(username);
+  const foundUser = await find(username);
 
   if (!foundUser) {
     return res.status(401).json({ error: "Invalid username or password." });
